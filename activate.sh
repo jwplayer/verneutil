@@ -11,7 +11,7 @@ RBACTIVATE_CALLED=$_
 if [[ $RBACTIVATE_CALLED != $0 ]];
     then
       echo -e "\033[1;31mERROR:\033[0m this file must be sourced."
-      # exit 1
+      exit 1
     else
       RBACTIVATE_RELPATH_FILE=$RBACTIVATE_CALLED
 fi
@@ -27,15 +27,6 @@ get_virtual_env() {
 
 # track the old version of gem env vars (if relevant)
 # and don't overwrite env vars on multiple activations
-# Don't activate multiple times otherwise you're gem envvars are all
-# messed up
-# THE FIX
-# there's a way to deal with this by only setting these the first time
-# that the env is activated (i.e, using $VIRTUALENV) and only restoring
-# the initial envvars on environment destruction but I'm not going to
-# deal with that right now
-# you have been forewarned... don't activate you virtualenv multiple times
-# if you value you default environment variables!
 if [ -z "${VIRTUAL_ENV}" ] ; then
     if [ -n "${GEM_HOME-}" ] ; then
         echo "setting gem home"
@@ -132,8 +123,6 @@ deactivate nondestructive bootstrap
 _OLD_VIRTUAL_PATH="$PATH"
 PATH="$VIRTUAL_ENV/bin:$VIRTUAL_ENV/lib/ruby/bin:$PATH"
 export PATH
-
-
 
 
 # Set virtualenv gems environment vars
