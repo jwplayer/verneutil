@@ -10,12 +10,22 @@ RBACTIVATE_CALLED=$_
 RBACTIVATE_RELPATH_FILE=$RBACTIVATE_CALLED
 
 
+# This should detect bash and zsh, which have a hash command that must
+# be called to get it to forget past commands.  Without forgetting
+# past commands the $PATH changes we made may not be respected
+# if [ -n "${BASH-}" -o -n "${ZSH_VERSION-}" ] ; then
+#     hash -r 2>/dev/null
+# fi
+
 
 get_virtual_env() {
     # Get the path that the script is being called from
     local RBACTIVATE_PATHROOT="$( cd -P "$( dirname "$SOURCE" )" && pwd )"  # calling directory
     local RBACTIVATE_ABSPATH_FILE="$RBACTIVATE_PATHROOT/$RBACTIVATE_RELPATH_FILE"  # path to script
     VIRTUAL_ENV="${RBACTIVATE_ABSPATH_FILE%/*}"
+    echo "RBACTIVATE_PATHROOT:$RBACTIVATE_PATHROOT"
+    echo "RBACTIVATE_ABSPATH_FILE:$RBACTIVATE_ABSPATH_FILE"
+    echo "VIRTUAL_ENV:$VIRTUAL_ENV"
 }
 
 
