@@ -3,10 +3,21 @@
 # verneutil is a program to create Ruby virtual environments.
 #
 
-
 #
 # colors for the console
 #
+
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  THISDIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+THISDIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+echo "THISDIR: $THISDIR"
+
 
 RED="\033[0;31m"
 REDB="\033[1;31m"
@@ -25,7 +36,6 @@ GRAYB="\033[1;37m"
 BOLD="\033[1m"
 RESET="\033[0m"
 
-
 error() {
     echo -e "${REDB}ERROR: ${RESET}$1"
 }
@@ -40,16 +50,16 @@ bold() {
     echo -e "${BOLD}$1${RESET}"
 }
 
-
+# FIX ME: this needs to be portable
 ruby_versions_available() {
-    ./ruby-build/bin/ruby-build --definitions
+    $THISDIR/ruby-build/bin/ruby-build --definitions
 }
 
 
 get_installed_rubies() {
     RUBIES=()
     local version
-    for version in .rubies/*
+    for version in $THISDIR/.rubies/*
       do
         RUBIES+=("${version##*/}")
       done
@@ -113,12 +123,12 @@ mgr_build_ruby() {
     fi
 
 
-    if [ -d .rubies/$RUBY_VERSION ];
+    if [ -d $THISDIR/.rubies/$RUBY_VERSION ];
       then
         info "ruby version $RUBY_VERSION already installed"
         exit 0
       else
-        mkdir .rubies/$RUBY_VERSION
+        mkdir $THISDIR/.rubies/$RUBY_VERSION
     fi
 
     echo ""
@@ -128,12 +138,20 @@ mgr_build_ruby() {
             bold "ruby version $RUBY_VERSION successfully installed"
         else
             error "unable to create ruby version $RUBY_VERSION"
-            rm -rf .rubies/$RUBY_VERSION
+            rm -rf $THISDIR/.rubies/$RUBY_VERSION
             exit 1
     fi
 
 }
 
+
+ctl_init_app() {
+    local cwd=$(pwd)
+    cd $THISDIR
+    git submodule init
+    git submodule update
+    cd $cwd
+}
 
 
 # -------------------------------------
@@ -186,11 +204,10 @@ make_ruby_env() {
 
         mkdir -p $ENVDIR/lib/ruby/specs
         mkdir -p $ENVDIR/bin
-        cp activate.sh $ENVDIR/activate
+        cp $THISDIR/activate.sh $ENVDIR/activate
 
         # Absolute path to ruby binaries
-        local cwd=$(pwd)
-        ln -s $cwd/.rubies/$2/bin/* $ENVDIR/bin/
+        ln -s $THISDIR/.rubies/$2/bin/* $ENVDIR/bin/
 
     fi
 }
@@ -240,6 +257,8 @@ main() {
     "-l" | "--list")                mgr_list_rubies;;
 
     "-c" | "--create")      make_ruby_env "$@";;
+
+    "init")    ctl_init_app;;
 
     *)      echo "Try --help, although it's not helpful";;
 
