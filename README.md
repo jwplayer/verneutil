@@ -130,7 +130,7 @@ Known Issues
 Somewhere around <= ruby v2.0.0 `gem` is really badly behaved. It's possible that
 `gem` will write into `~/.gem` even if you don't want it to... deal with it.
 
-I don't really know what's going to happen with when you use `rubinius` or  `mruby`.
+I don't really know what's going to happen when you use `rubinius` or  `mruby`.
 
 
 About the name
