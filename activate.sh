@@ -6,35 +6,20 @@
 # this virtual environment resides. Note that $VIRTUAL_ENV can be preserved
 # by calling `deactivate nondestructive bootstrap`.
 
-get_source_path() {
-    local last
-    for last; do true; done
+RBACTIVATE_CALLED=$_
 
-    RBACTIVATE_CALLED=$last
-}
-
-# RBACTIVATE_RELPATH_FILE=$RBACTIVATE_CALLED
-echo "RBACTIVATE_CALLED:$RBACTIVATE_CALLED"
+if [ -n "${BASH-}" ] ; then
+    RBACTIVATE_ABSOLUTE_PATH=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)/`basename "${BASH_SOURCE[0]}"`
+fi
 
 
-# This should detect bash and zsh, which have a hash command that must
-# be called to get it to forget past commands.  Without forgetting
-# past commands the $PATH changes we made may not be respected
-# if [ -n "${BASH-}" -o -n "${ZSH_VERSION-}" ] ; then
-#     hash -r 2>/dev/null
-# fi
+if [ -n "${ZSH_VERSION-}" ] ; then
+    RBACTIVATE_ABSOLUTE_PATH="$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)"/$RBACTIVATE_CALLED
+fi
 
+VIRTUAL_ENV="${RBACTIVATE_ABSOLUTE_PATH%/*}"
+export VIRTUAL_ENV
 
-get_virtual_env() {
-    # Get the path that the script is being called from
-    local RBACTIVATE_PATHROOT="$( cd -P "$( dirname "$SOURCE" )" && pwd )"  # calling directory
-    local RBACTIVATE_ABSPATH_FILE="$RBACTIVATE_PATHROOT/$RBACTIVATE_CALLED"  # path to script
-    VIRTUAL_ENV="${RBACTIVATE_ABSPATH_FILE%/*}"
-    echo "RBACTIVATE_PATHROOT:$RBACTIVATE_PATHROOT"
-    echo "RBACTIVATE_ABSPATH_FILE:$RBACTIVATE_ABSPATH_FILE"
-    echo "VIRTUAL_ENV:$VIRTUAL_ENV"
-    echo
-}
 
 
 # track the old version of gem env vars (if relevant)
@@ -54,9 +39,6 @@ if [ -z "${VIRTUAL_ENV}" ] ; then
     fi
 fi
 
-get_virtual_env
-export VIRTUAL_ENV
-
 
 
 deactivate () {
@@ -72,8 +54,7 @@ deactivate () {
     # unset scratch vars only when bootstrapping
     if [ "${2-}" = "bootstrap" ] ;  then
         unset RBACTIVATE_CALLED
-        unset RBACTIVATE_RELPATH_FILE
-        unset -f get_virtual_env
+        unset RBACTIVATE_ABSOLUTE_PATH
     fi
 
     # reset old environment variables
