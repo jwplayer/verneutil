@@ -111,3 +111,9 @@ Somewhere around <= ruby v2.0.0 `gem` is really badly behaved. It's possible tha
 I don't really know what's going to happen with when you use `rubinius` or  `mruby`.
 
 
+About the name
+--------------
+`verneutil` is a bastardization on "verneuil" (go ahead, [look it up][verneuil_process]).
+
+
+[verneuil_process]: https://en.wikipedia.org/wiki/Verneuil_process
