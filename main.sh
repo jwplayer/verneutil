@@ -3,9 +3,7 @@
 # verneutil is a program to create Ruby virtual environments.
 #
 
-#
-# colors for the console
-#
+
 
 
 SOURCE="${BASH_SOURCE[0]}"
@@ -16,8 +14,11 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 THISDIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
-echo "THISDIR: $THISDIR"
 
+
+#
+# colors for the console
+#
 
 RED="\033[0;31m"
 REDB="\033[1;31m"
