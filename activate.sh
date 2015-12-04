@@ -7,7 +7,8 @@
 # by calling `deactivate nondestructive bootstrap`.
 
 RBACTIVATE_CALLED=$_
-RBACTIVATE_RELPATH_FILE=$RBACTIVATE_CALLED
+# RBACTIVATE_RELPATH_FILE=$RBACTIVATE_CALLED
+echo "RBACTIVATE_CALLED:$RBACTIVATE_CALLED"
 
 
 # This should detect bash and zsh, which have a hash command that must
@@ -21,11 +22,12 @@ RBACTIVATE_RELPATH_FILE=$RBACTIVATE_CALLED
 get_virtual_env() {
     # Get the path that the script is being called from
     local RBACTIVATE_PATHROOT="$( cd -P "$( dirname "$SOURCE" )" && pwd )"  # calling directory
-    local RBACTIVATE_ABSPATH_FILE="$RBACTIVATE_PATHROOT/$RBACTIVATE_RELPATH_FILE"  # path to script
+    local RBACTIVATE_ABSPATH_FILE="$RBACTIVATE_PATHROOT/$RBACTIVATE_CALLED"  # path to script
     VIRTUAL_ENV="${RBACTIVATE_ABSPATH_FILE%/*}"
     echo "RBACTIVATE_PATHROOT:$RBACTIVATE_PATHROOT"
     echo "RBACTIVATE_ABSPATH_FILE:$RBACTIVATE_ABSPATH_FILE"
     echo "VIRTUAL_ENV:$VIRTUAL_ENV"
+    echo
 }
 
 
