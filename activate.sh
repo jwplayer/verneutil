@@ -6,7 +6,13 @@
 # this virtual environment resides. Note that $VIRTUAL_ENV can be preserved
 # by calling `deactivate nondestructive bootstrap`.
 
-RBACTIVATE_CALLED=$_
+get_source_path() {
+    local last
+    for last; do true; done
+
+    RBACTIVATE_CALLED=$last
+}
+
 # RBACTIVATE_RELPATH_FILE=$RBACTIVATE_CALLED
 echo "RBACTIVATE_CALLED:$RBACTIVATE_CALLED"
 
