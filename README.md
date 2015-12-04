@@ -103,6 +103,28 @@ your environments variables and paths:
 deactivate
 ```
 
+
+
+System Depencies
+----------------
+At a minimum on ubuntu you'll need the following packages in order to compile
+recent versions of ruby (~v2.1+):
+
+* `git`
+* `curl` or `wget`
+* `libssl-dev`
+* `libreadline-dev `
+* `zlib1g-dev`
+* `build-essential`
+
+If you want to install old rubies (~v1.8), you'll probably need some additional
+packages like:
+
+* `subversion`
+* `autoconf`
+* `byacc`
+
+
 Known Issues
 ------------
 Somewhere around <= ruby v2.0.0 `gem` is really badly behaved. It's possible that
