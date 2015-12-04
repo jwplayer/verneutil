@@ -134,7 +134,7 @@ mgr_build_ruby() {
 
     echo ""
 
-    if $(./ruby-build/bin/ruby-build $RUBY_VERSION .rubies/$RUBY_VERSION);
+    if $($THISDIR/ruby-build/bin/ruby-build $RUBY_VERSION $THISDIR/.rubies/$RUBY_VERSION);
         then
             bold "ruby version $RUBY_VERSION successfully installed"
         else
