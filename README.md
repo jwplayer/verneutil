@@ -21,13 +21,13 @@ Installing & Managing `verneutil`
 Clone the repo to a reasonable location for your needs:
 
 ```bash
-git clone https://url /usr/local/share/verneutil
+git clone https://github.com/jwplayer/verneutil.git /usr/local/lib/verneutil
 ```
 
 Create link in your system path, for example:
 
 ```bash
-ln -s /usr/local/share/verneutil/main.sh /usr/local/bin/verneutil
+ln -s /usr/local/lib/verneutil/main.sh /usr/local/bin/verneutil
 ```
 
 
