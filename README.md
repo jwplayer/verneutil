@@ -113,7 +113,7 @@ I don't really know what's going to happen with when you use `rubinius` or  `mru
 
 About the name
 --------------
-`verneutil` is a bastardization on "verneuil" (go ahead, [look it up][verneuil_process]).
+`verneutil` is a bastardization of "verneuil" (go ahead, [look it up][verneuil_process]).
 
 
 [verneuil_process]: https://en.wikipedia.org/wiki/Verneuil_process
