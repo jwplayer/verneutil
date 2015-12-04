@@ -7,14 +7,8 @@
 # by calling `deactivate nondestructive bootstrap`.
 
 RBACTIVATE_CALLED=$_
+RBACTIVATE_RELPATH_FILE=$RBACTIVATE_CALLED
 
-if [[ $RBACTIVATE_CALLED != $0 ]];
-    then
-      echo -e "\033[1;31mERROR:\033[0m this file must be sourced."
-      exit 1
-    else
-      RBACTIVATE_RELPATH_FILE=$RBACTIVATE_CALLED
-fi
 
 
 get_virtual_env() {
