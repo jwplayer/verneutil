@@ -1,4 +1,4 @@
 [submodule "ruby-build"]
-	path = ruby-build
+	path = bin/ruby-build
 	url = https://github.com/rbenv/ruby-build
     ignore = dirty
