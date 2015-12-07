@@ -139,4 +139,4 @@ About the name
 
 
 [verneuil_process]: https://en.wikipedia.org/wiki/Verneuil_process
-[license_file]: https://github.com/jwplayer/verneutil/blob/master/LICENSE
+[license_file]: https://raw.githubusercontent.com/jwplayer/verneutil/master/LICENSE
