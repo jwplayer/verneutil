@@ -135,7 +135,8 @@ I don't really know what's going to happen when you use `rubinius` or  `mruby`.
 
 About the name
 --------------
-`verneutil` is a bastardization of "verneuil" (go ahead, [look it up][verneuil_process]).
+`verneutil` is a bastardization of "verneuil" (go ahead, [look it up][verneuil_process]). And before you ask it's [MIT-licensed][license_file].
 
 
 [verneuil_process]: https://en.wikipedia.org/wiki/Verneuil_process
+[license_file]: https://github.com/jwplayer/verneutil/blob/master/LICENSE
