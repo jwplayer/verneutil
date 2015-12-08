@@ -1,3 +1,13 @@
+addons:
+  apt:
+    packages:
+    - git
+    - curl
+    - libssl-dev
+    - libreadline-dev
+    - zlib1g-dev
+    - build-essential
+
 before_install:
   - sudo add-apt-repository ppa:duggan/bats --yes
   - sudo apt-get update -qq
