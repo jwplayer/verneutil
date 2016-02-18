@@ -1,9 +1,5 @@
-sudo: true
-
 addons:
   apt:
-    sources:
-      - duggan-bats
     packages:
     - git
     - curl
@@ -11,7 +7,12 @@ addons:
     - libreadline-dev
     - zlib1g-dev
     - build-essential
-    - bats
+
+before_install:
+  - sudo add-apt-repository ppa:duggan/bats --yes
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq bats
 
 script:
   - bats test/bats
+
