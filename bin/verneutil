@@ -13,7 +13,6 @@ done
 THISDIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 
-
 #
 # colors for the console
 #
@@ -58,9 +57,11 @@ ruby_versions_available() {
 get_installed_rubies() {
     RUBIES=()
     local version
-    for version in $THISDIR/.rubies/*
+    local rubies="$THISDIR/.rubies/*"
+    for version in $rubies
       do
-        RUBIES+=("${version##*/}")
+        local rubyVersion="${version##*/.rubies/}"
+        RUBIES+=(${rubyVersion})
       done
 }
 
@@ -98,7 +99,6 @@ is_ruby_version_available() {
 mgr_list_rubies() {
     local version
     get_installed_rubies
-
     for version in ${RUBIES[@]}
       do
         bold "* $version"
@@ -132,7 +132,11 @@ mgr_build_ruby() {
 
     echo ""
 
-    if $($THISDIR/ruby-build/bin/ruby-build $RUBY_VERSION $THISDIR/.rubies/$RUBY_VERSION);
+    local output=$($THISDIR/ruby-build/bin/ruby-build $RUBY_VERSION $THISDIR/.rubies/$RUBY_VERSION)
+    # INFO: removing warning that maybe witnessed on macOS when dependencies are installed via Homebrew
+    output=${output//ruby-build: use openssl from homebrew/}
+    output=${output//ruby-build: use readline from homebrew/}
+    if $output;
         then
             bold "ruby version $RUBY_VERSION successfully installed"
         else
@@ -266,4 +270,3 @@ main() {
 
 
 main $@
-
