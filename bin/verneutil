@@ -57,9 +57,9 @@ ruby_versions_available() {
 get_installed_rubies() {
     RUBIES=()
     local version
-    for version in "$THISDIR/.rubies/*"
+    for version in $THISDIR/.rubies/*
       do
-        RUBIES+=("${version##*/.rubies/}")
+        RUBIES+=("${version##*/}")
       done
 }
 
