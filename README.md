@@ -27,7 +27,7 @@ git clone https://github.com/jwplayer/verneutil.git /usr/local/lib/verneutil
 Create link in your system path, for example:
 
 ```bash
-ln -s /usr/local/lib/verneutil/bin/main.sh /usr/local/bin/verneutil
+ln -s /usr/local/lib/verneutil/bin/verneutil /usr/local/bin/verneutil
 ```
 
 
